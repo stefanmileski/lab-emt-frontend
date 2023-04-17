@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ReactPaginate } from 'react-paginate';
+import ReactPaginate from 'react-paginate';
 
 export default function BooksList({ books, onDelete, onEdit }) { 
 
@@ -17,7 +17,7 @@ export default function BooksList({ books, onDelete, onEdit }) {
                 <td>{book.category}</td>
                 <td>{book.availableCopies}</td>
                 <td>{book.author.name}</td>
-                <td><Link to={`/books/${book.id}`} className='btn btn-danger'>Details</Link></td>
+                <td><Link to={`/books/${book.id}`} className='btn btn-success'>Details</Link></td>
                 <td><button title='Delete' className='btn btn-danger' onClick={()=>onDelete(book.id)}>Delete</button></td>
                 <td><Link to={`/books/edit/${book.id}`} onClick={()=>onEdit(book.id)} className='btn btn-warning'>Edit</Link></td>
             </tr>);
@@ -34,9 +34,9 @@ export default function BooksList({ books, onDelete, onEdit }) {
     const booksPaginated = getBooksPage(offset, nextPageOffset)
 
     return (
-        <div className="container">
-            <Link to={"/authors"} className='btn btn-primary mt-4 mb-4'>Authors</Link>
-            <Link to={"/books/add"} className='btn btn-block btn-dark'>Add new Book</Link>
+        <div className="container m-5">
+            {/* <Link to={"/authors"} className='btn btn-primary mt-4 mb-4'>Authors</Link> */}
+            <Link to={"/books/add"} className='btn btn-block btn-dark mb-4'>Add new Book</Link>
             <div>
                 <div>
                     <table className='table-bordered table'>

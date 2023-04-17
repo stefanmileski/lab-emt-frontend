@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
 import './App.css';
+import { useEffect, useState } from 'react';
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
-import { deleteBook, getAllBooks } from '../../api-calls/api-calls';
+import { deleteBook, addBook, updateBook, getAllBooks } from '../../api-calls/api-calls';
 import BooksList from '../Book/BooksList';
 
 export default function App() {
@@ -14,25 +14,27 @@ export default function App() {
   }, []);
 
   function updateBooks() {
-    setBooks(getAllBooks());
+    getAllBooks().then((books) => {
+      setBooks(books);
+    });
   }
 
-  function deleteBook(id) {
+  function deleteBookLocal(id) {
     deleteBook(id).then(() => {
       updateBooks();
     });
   }
 
-  function addBook(name, category, authorId, availableCopies) {
+  function addBookLocal(name, category, authorId, availableCopies) {
     let book = { name: name, category: category, authorId: authorId, availableCopies: availableCopies }
     addBook(book).then(() => {
       updateBooks();
     });
   }
 
-  function editBook(id, name, category, authorId, availableCopies) {
+  function editBookLocal(id, name, category, authorId, availableCopies) {
     let book = { name: name, category: category, authorId: authorId, availableCopies: availableCopies }
-    editBook(id, book).then(() => {
+    updateBook(id, book).then(() => {
       updateBooks();
     });
   }
@@ -42,8 +44,8 @@ export default function App() {
       <div className="App">
         <Routes>
           <Route path="/books" element={<BooksList books={books}
-            onDelete={deleteBook}
-            onEdit={editBook} />} />
+            onDelete={deleteBookLocal}
+            onEdit={editBookLocal} />} />
         </Routes>
       </div>
     </Router>
