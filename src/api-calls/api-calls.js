@@ -1,4 +1,3 @@
-import { async } from "q";
 import instance from "../axios/axios";
 
 export async function getAllBooks() {
