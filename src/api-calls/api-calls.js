@@ -15,8 +15,8 @@ export async function addBook(book) {
   return response.data;
 }
 
-export async function updateBook(book) { 
-  const response = await instance.put(`/books/${book.id}`, book);
+export async function updateBook(id, book) { 
+  const response = await instance.put(`/books/${id}`, book);
   return response.data;
 }
 
